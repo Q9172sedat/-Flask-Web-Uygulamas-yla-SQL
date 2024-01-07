@@ -2,16 +2,16 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/User/Desktop./email.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:Clarusway_1@mysql-rds.cvg6o228cr8f.us-east-1.rds.amazonaws.com/clarusway'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 with app.app_context():
     drop_table = text('DROP TABLE IF EXISTS users;')
-    users_table = text(""" 
-    CREATE TABLE users(
-    username VARCHAR NOT NULL PRIMARY KEY,
-    email VARCHAR);
+    users_table = text("""
+    CREATE TABLE users (
+    username VARCHAR(50) NOT NULL PRIMARY KEY,
+    email VARCHAR(50));
     """)
     data = text("""
     INSERT INTO users
